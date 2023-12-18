@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
 import NavBar from './components/NavBar';
 import Notification from './components/Notification';
@@ -21,6 +22,7 @@ function App() {
       <Notification />
       <Login />
       <NavBar />
+      <BottomNav />
     </ThemeProvider>
   );
 }

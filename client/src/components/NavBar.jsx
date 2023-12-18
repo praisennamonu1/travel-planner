@@ -20,56 +20,59 @@ const NavBar = () => {
   } = useValue();
 
   return (
-    <AppBar>
-      <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Box sx={{ mr: 1 }}>
-            <IconButton size="large" color="inherit">
-              <Menu />
-            </IconButton>
-          </Box>
-          {!currentUser ? (
-            <Typography
-              variant="h6"
-              component="h1"
-              noWrap
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-            >
-              Login To View Personalized Dashboard
-            </Typography>
-          ) : (
-            <Typography
-              variant="h6"
-              component="h1"
-              noWrap
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-            >
-              Konnichiwa! {currentUser.name.toUpperCase()}
-            </Typography>
-          )}
+    <>
+      <AppBar>
+        <Container maxWidth="lg">
+          <Toolbar disableGutters>
+            <Box sx={{ mr: 1 }}>
+              <IconButton size="large" color="inherit">
+                <Menu />
+              </IconButton>
+            </Box>
+            {!currentUser ? (
+              <Typography
+                variant="h6"
+                component="h1"
+                noWrap
+                sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+              >
+                Login To View Personalized Dashboard
+              </Typography>
+            ) : (
+              <Typography
+                variant="h6"
+                component="h1"
+                noWrap
+                sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+              >
+                Konnichiwa! {currentUser.name.toUpperCase()}
+              </Typography>
+            )}
 
-          <Typography
-            variant="h6"
-            component="h1"
-            noWrap
-            sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-          >
-            YRW
-          </Typography>
-          {!currentUser ? (
-            <Button
-              color="inherit"
-              startIcon={<Lock />}
-              onClick={() => dispatch({ type: 'OPEN_LOGIN' })}
+            <Typography
+              variant="h6"
+              component="h1"
+              noWrap
+              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
-              Login
-            </Button>
-          ) : (
-            <UserIcons />
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+              YRW
+            </Typography>
+            {!currentUser ? (
+              <Button
+                color="inherit"
+                startIcon={<Lock />}
+                onClick={() => dispatch({ type: 'OPEN_LOGIN' })}
+              >
+                Login
+              </Button>
+            ) : (
+              <UserIcons />
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Toolbar />
+    </>
   );
 };
 
