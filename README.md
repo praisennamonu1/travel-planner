@@ -1,5 +1,11 @@
 # Final Project: Travel Planner
 
+## Run the project
+
+1. Clone the project
+2. Run `npm install`
+3. Run `npm start`
+
 ## Project Description
 
 The Travel Planner app is your opportunity to put together the concepts you've learned throughout the course. This app will let the user plan trips by fetching data from various APIs to get weather forecasts, hotel prices, popular attractions, and more.
