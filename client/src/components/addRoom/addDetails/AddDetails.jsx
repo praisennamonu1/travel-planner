@@ -53,7 +53,7 @@ const AddDetails = () => {
               variant="standard"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">NGN</InputAdornment>
+                  <InputAdornment position="start">$</InputAdornment>
                 ),
               }}
               inputProps={{ type: 'number', min: 1, max: 50 }}
