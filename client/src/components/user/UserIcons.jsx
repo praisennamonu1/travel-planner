@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { Box, IconButton, Badge, Tooltip, Avatar } from '@mui/material';
-import { Mail } from '@mui/icons-material';
+import { Mail, Notifications } from '@mui/icons-material';
+import { Avatar, Badge, Box, IconButton, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
 import { useValue } from '../../context/ContextProvider';
+import useCheckToken from '../../hooks/useCheckToken';
 import UserMenu from './UserMenu';
 
-function UserIcons() {
+const UserIcons = () => {
+  useCheckToken();
   const {
     state: { currentUser },
   } = useValue();
@@ -20,7 +22,7 @@ function UserIcons() {
       </IconButton>
       <IconButton size="large" color="inherit">
         <Badge color="error" badgeContent={20}>
-          <Mail></Mail>
+          <Notifications />
         </Badge>
       </IconButton>
       <Tooltip title="Open User Settings">
@@ -33,6 +35,6 @@ function UserIcons() {
       <UserMenu {...{ anchorUserMenu, setAnchorUserMenu }} />
     </Box>
   );
-}
+};
 
 export default UserIcons;

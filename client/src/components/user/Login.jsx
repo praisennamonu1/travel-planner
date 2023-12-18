@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
 import { Close, Send } from '@mui/icons-material';
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -9,14 +7,15 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-  Link,
   TextField,
 } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { login, register } from '../../actions/user';
 import { useValue } from '../../context/ContextProvider';
 import GoogleOneTapLogin from './GoogleOneTapLogin';
 import PasswordField from './PasswordField';
 
-function Login() {
+const Login = () => {
   const {
     state: { openLogin },
     dispatch,
@@ -34,26 +33,21 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // testing Loading
-    dispatch({ type: 'START_LOADING' });
-
-    setTimeout(() => {
-      dispatch({ type: 'END_LOADING' });
-    }, 6000);
-
-    //testing Notification
+    const email = emailRef.current.value;
     const password = passwordRef.current.value;
+    if (!isRegister) return login({ email, password }, dispatch);
+    const name = nameRef.current.value;
     const confirmPassword = confirmPasswordRef.current.value;
-    if (password !== confirmPassword) {
-      dispatch({
+    if (password !== confirmPassword)
+      return dispatch({
         type: 'UPDATE_ALERT',
         payload: {
           open: true,
           severity: 'error',
-          message: 'Ottoke? Passwords do not match!',
+          message: 'Passwords do not match',
         },
       });
-    }
+    register({ name, email, password }, dispatch);
   };
 
   useEffect(() => {
@@ -78,7 +72,7 @@ function Login() {
       <form onSubmit={handleSubmit}>
         <DialogContent dividers>
           <DialogContentText>
-            Sunimase'n kudasai! Please {title.toLowerCase()} to continue:
+            Please fill your information in the fields below:
           </DialogContentText>
           {isRegister && (
             <TextField
@@ -102,7 +96,7 @@ function Login() {
             label="Email"
             type="email"
             fullWidth
-            inputRef={nameRef}
+            inputRef={emailRef}
             required
           />
           <PasswordField {...{ passwordRef }} />
@@ -121,33 +115,18 @@ function Login() {
         </DialogActions>
       </form>
       <DialogActions sx={{ justifyContent: 'left', p: '5px 24px' }}>
-        {isRegister ? (
-          <>
-            <p>Already have an account? Let's</p>
-            <Link
-              sx={{ cursor: 'pointer' }}
-              onClick={() => setIsRegister(!isRegister)}
-            >
-              login
-            </Link>{' '}
-          </>
-        ) : (
-          <>
-            <p>Don't have an account? Let's</p>
-            <Link
-              sx={{ cursor: 'pointer' }}
-              onClick={() => setIsRegister(!isRegister)}
-            >
-              register
-            </Link>{' '}
-          </>
-        )}
+        {isRegister
+          ? 'Do you have an account? Sign in now '
+          : "Don't you have an account? Create one now "}
+        <Button onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? 'Login' : 'Register'}
+        </Button>
       </DialogActions>
       <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
         <GoogleOneTapLogin />
       </DialogActions>
     </Dialog>
   );
-}
+};
 
 export default Login;

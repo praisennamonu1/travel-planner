@@ -1,6 +1,9 @@
-import NavBar from './components/NavBar';
-import Login from './components/user/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Loading from './components/Loading';
+import NavBar from './components/NavBar';
+import Notification from './components/Notification';
+import Login from './components/user/Login';
 
 const darkTheme = createTheme({
   palette: {
@@ -14,6 +17,8 @@ const darkTheme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
+      <Loading />
+      <Notification />
       <Login />
       <NavBar />
     </ThemeProvider>

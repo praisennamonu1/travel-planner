@@ -1,7 +1,8 @@
 import { Alert, Snackbar } from '@mui/material';
+import React from 'react';
 import { useValue } from '../context/ContextProvider';
 
-function Notification() {
+const Notification = () => {
   const {
     state: { alert },
     dispatch,
@@ -29,6 +30,6 @@ function Notification() {
       </Alert>
     </Snackbar>
   );
-}
+};
 
 export default Notification;

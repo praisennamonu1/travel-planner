@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   AppBar,
   Box,
@@ -7,22 +8,19 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Lock, Menu } from '@mui/icons-material';
-import photoURL from '../assets/profile.jpg';
+
 import { useValue } from '../context/ContextProvider';
 import UserIcons from './user/UserIcons';
 
-const user = { name: 'Praise', photoURL };
-
-function NavBar() {
+const NavBar = () => {
   const {
     state: { currentUser },
     dispatch,
   } = useValue();
 
   return (
-    <AppBar position="fixed" color="secondary" sx={{ top: 'auto', bottom: 0 }}>
+    <AppBar>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box sx={{ mr: 1 }}>
@@ -30,21 +28,33 @@ function NavBar() {
               <Menu />
             </IconButton>
           </Box>
-          <Typography
-            variant="h6"
-            component="h1"
-            noWrap
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-          >
-            Irrashai!
-          </Typography>
+          {!currentUser ? (
+            <Typography
+              variant="h6"
+              component="h1"
+              noWrap
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+            >
+              Login To View Personalized Dashboard
+            </Typography>
+          ) : (
+            <Typography
+              variant="h6"
+              component="h1"
+              noWrap
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
+            >
+              Konnichiwa! {currentUser.name.toUpperCase()}
+            </Typography>
+          )}
+
           <Typography
             variant="h6"
             component="h1"
             noWrap
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            Irrashai!
+            YRW
           </Typography>
           {!currentUser ? (
             <Button
@@ -61,6 +71,6 @@ function NavBar() {
       </Container>
     </AppBar>
   );
-}
+};
 
 export default NavBar;
