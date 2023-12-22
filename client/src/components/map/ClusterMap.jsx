@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useValue } from '../../context/ContextProvider';
 import { getRooms } from '../../actions/room';
 import ReactMapGL, { Marker } from 'react-map-gl';
@@ -57,6 +57,7 @@ const ClusterMap = () => {
 
   useEffect(() => {
     if (mapRef.current) {
+      console.log(mapRef.current.getMap().getBounds().toArray().flat());
       setBounds(mapRef.current.getMap().getBounds().toArray().flat());
     }
   }, [mapRef?.current]);
@@ -64,7 +65,7 @@ const ClusterMap = () => {
     <ReactMapGL
       initialViewState={{ latitude: 51.5072, longitude: 0.1276 }}
       mapboxAccessToken={import.meta.env.VITE_REACT_APP_MAP_TOKEN}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle="mapbox://styles/mapbox/streets-v12"
       ref={mapRef}
       onZoomEnd={(e) => setZoom(Math.round(e.viewState.zoom))}
     >

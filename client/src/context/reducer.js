@@ -21,7 +21,7 @@ const reducer = (state, action) => {
       return { ...state, currentUser: action.payload };
 
     case 'UPDATE_IMAGES':
-      return { ...state, images: [...state.images, ...action.payload] };
+      return { ...state, images: [...state.images, action.payload] };
     case 'DELETE_IMAGE':
       return {
         ...state,
@@ -31,27 +31,12 @@ const reducer = (state, action) => {
       return { ...state, details: { ...state.details, ...action.payload } };
     case 'UPDATE_LOCATION':
       return { ...state, location: action.payload };
-    case 'UPDATE_UPDATED_ROOM':
-      return { ...state, updatedRoom: action.payload };
-    case 'UPDATE_DELETED_IMAGES':
-      return {
-        ...state,
-        deletedImages: [...state.deletedImages, ...action.payload],
-      };
-    case 'UPDATE_ADDED_IMAGES':
-      return {
-        ...state,
-        addedImages: [...state.addedImages, ...action.payload],
-      };
     case 'RESET_ROOM':
       return {
         ...state,
         images: [],
         details: { title: '', description: '', price: 0 },
         location: { lng: 0, lat: 0 },
-        updatedRoom: null,
-        deletedImages: [],
-        addedImages: [],
       };
 
     case 'UPDATE_ROOMS':
@@ -90,20 +75,6 @@ const reducer = (state, action) => {
         filteredRooms: state.rooms,
       };
 
-    case 'UPDATE_ROOM':
-      return { ...state, room: action.payload };
-
-    case 'UPDATE_USERS':
-      return { ...state, users: action.payload };
-    case 'DELETE_ROOM':
-      return {
-        ...state,
-        rooms: state.rooms.filter((room) => room._id !== action.payload),
-      };
-
-    case 'UPDATE_SECTION':
-      return { ...state, section: action.payload };
-
     default:
       throw new Error('No matched action!');
   }
@@ -116,8 +87,8 @@ const applyFilter = (rooms, address, price) => {
   if (address) {
     const { lng, lat } = address;
     filteredRooms = filteredRooms.filter((room) => {
-      const lngDifference = Math.abs(lng - room.lng);
-      const latDifference = Math.abs(lat - room.lat);
+      const lngDifference = lng > room.lng ? lng - room.lng : room.lng - lng;
+      const latDifference = lat > room.lat ? lat - room.lat : room.lat - lat;
       return lngDifference <= 1 && latDifference <= 1;
     });
   }

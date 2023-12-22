@@ -1,5 +1,4 @@
 import { Box, Slider, Typography } from '@mui/material';
-import React from 'react';
 import { useValue } from '../../context/ContextProvider';
 
 const marks = [

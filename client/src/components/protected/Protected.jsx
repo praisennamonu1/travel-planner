@@ -1,4 +1,3 @@
-import React from 'react';
 import { useValue } from '../../context/ContextProvider';
 import AccessMessage from './AccessMessage';
 

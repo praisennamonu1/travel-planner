@@ -1,6 +1,5 @@
 import { Lock } from '@mui/icons-material';
 import { Alert, AlertTitle, Button, Container } from '@mui/material';
-import React from 'react';
 import { useValue } from '../../context/ContextProvider';
 
 const AccessMessage = () => {
